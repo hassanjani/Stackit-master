@@ -1,9 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_forget_pass_recover_with_verify/Screens/tabbar_screen/Tenant_schedule_tab.dart';
 import 'package:flutter_forget_pass_recover_with_verify/Screens/tabbar_screen/Transient_schedule_tab.dart';
-import 'package:flutter_forget_pass_recover_with_verify/Widgets/Component/simpleText.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -87,7 +85,7 @@ class _DB_Transient_PilotsState extends State<DB_Transient_Pilots> {
                               .onchange("Tid", newValue);
                         });
                       },
-                      items: data == null
+                      items: data != null
                           ? data.map((value) {
                               return DropdownMenuItem(
                                 value: value["id"] == null

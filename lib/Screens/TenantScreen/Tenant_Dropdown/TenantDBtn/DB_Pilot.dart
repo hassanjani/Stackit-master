@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_forget_pass_recover_with_verify/Screens/FBOScreen/FBO_Tenant_Schedule_tab.dart';
+import 'package:flutter_forget_pass_recover_with_verify/Screens/tabbar_screen/Tenant_schedule_tab.dart';
 import 'package:provider/provider.dart';
 
 // ignore: camel_case_types
@@ -21,7 +21,7 @@ class _DB_Tenant_PilotState extends State<DB_Tenant_Pilot> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Consumer<FBO_TenantScheduleProvider>(
+          Consumer<TenantScheduleProvider>(
             builder: (context, pdata, child) {
               return Container(
                 height: 35,
@@ -52,12 +52,12 @@ class _DB_Tenant_PilotState extends State<DB_Tenant_Pilot> {
                         ),
                       ),
                       hint: Text('Choose Option'), // Not necessary for Option 1
-                      value: pdata.Pid,
+                      value: pdata.selectedPilot,
                       onChanged: (newValue) {
-                        Provider.of<FBO_TenantScheduleProvider>(context,
+                        Provider.of<TenantScheduleProvider>(context,
                                 listen: false)
                             .selectedPilot = newValue;
-                        Provider.of<FBO_TenantScheduleProvider>(context,
+                        Provider.of<TenantScheduleProvider>(context,
                                 listen: false)
                             .onchange("Pid", newValue);
 
@@ -66,12 +66,11 @@ class _DB_Tenant_PilotState extends State<DB_Tenant_Pilot> {
                       },
                       items: pdata.data.map((value) {
                         return DropdownMenuItem(
-                          value: value["id"] == null
-                              ? pdata.Pid
-                              : value["id"].toString(),
+                          value:
+                              value["id"] == null ? "" : value["id"].toString(),
                           child: Text(
                               value["name"] == null
-                                  ? pdata.selectedPilot.toString()
+                                  ? ""
                                   : value["name"].toString(),
                               style: TextStyle(fontSize: 12)),
                         );
