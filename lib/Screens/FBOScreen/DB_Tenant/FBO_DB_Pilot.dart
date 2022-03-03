@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_forget_pass_recover_with_verify/Screens/tabbar_screen/Tenant_schedule_tab.dart';
 import 'package:provider/provider.dart';
 
 import '../FBO_Tenant_Schedule_tab.dart';
@@ -54,7 +53,7 @@ class _FBO_DB_Tenant_PilotState extends State<FBO_DB_Tenant_Pilot> {
                         ),
                       ),
                       hint: Text('Choose Option'), // Not necessary for Option 1
-                      value: pdata.selectedPilot,
+                      value: pdata.Pid,
                       onChanged: (newValue) {
                         Provider.of<FBO_TenantScheduleProvider>(context,
                                 listen: false)

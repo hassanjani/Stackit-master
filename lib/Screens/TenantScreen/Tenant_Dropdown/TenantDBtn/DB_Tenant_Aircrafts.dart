@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_forget_pass_recover_with_verify/Screens/tabbar_screen/Tenant_schedule_tab.dart';
+import 'package:flutter_forget_pass_recover_with_verify/Screens/FBOScreen/FBO_Tenant_Schedule_tab.dart';
 import 'package:provider/provider.dart';
 
 // ignore: camel_case_types
@@ -24,7 +24,7 @@ class _DB_Tenant_AircraftsState extends State<DB_Tenant_Aircrafts> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Consumer<TenantScheduleProvider>(
+          Consumer<FBO_TenantScheduleProvider>(
             builder: (context, pdata, child) {
               return Container(
                 height: 35,
@@ -57,10 +57,10 @@ class _DB_Tenant_AircraftsState extends State<DB_Tenant_Aircrafts> {
                       hint: Text('Choose Option'), // Not necessary for Option 1
                       value: pdata.selectedAircraft,
                       onChanged: (newValue) {
-                        Provider.of<TenantScheduleProvider>(context,
+                        Provider.of<FBO_TenantScheduleProvider>(context,
                                 listen: false)
                             .selectedAircraft = newValue;
-                        Provider.of<TenantScheduleProvider>(context,
+                        Provider.of<FBO_TenantScheduleProvider>(context,
                                 listen: false)
                             .onchange("Aid", newValue);
 

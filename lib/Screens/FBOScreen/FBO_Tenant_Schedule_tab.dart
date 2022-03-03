@@ -417,8 +417,13 @@ class FBO_TenantScheduleProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  getTenant() {
+    getAllTenants();
+    notifyListeners();
+  }
+
   List data = new List();
-  String selectedPilot;
+  String selectedPilot = "";
 
   // ignore: non_constant_identifier_names
   List AircraftData = new List();
@@ -457,8 +462,8 @@ class FBO_TenantScheduleProvider extends ChangeNotifier {
     print("DBPilot");
     print(response.body.toString());
     data = jsonData;
-    String abc;
-    selectedPilot = abc;
+    // String abc;
+    // selectedPilot = abc;
     notifyListeners();
   }
 
@@ -472,8 +477,8 @@ class FBO_TenantScheduleProvider extends ChangeNotifier {
     print("Aircraft");
     print(response.body.toString());
     AircraftData = jsonData;
-    String abc;
-    selectedAircraft = abc;
+    // String abc;
+    // selectedAircraft = abc;
     print(jsonData);
     notifyListeners();
   }
@@ -486,8 +491,8 @@ class FBO_TenantScheduleProvider extends ChangeNotifier {
     var jsonData = json.decode(jsonBody);
     print(response.statusCode);
     BuildingsData = jsonData;
-    String abc;
-    selectedBuilding = abc;
+    // String abc;
+    // selectedBuilding = abc;
     print(jsonData);
     notifyListeners();
   }
@@ -528,8 +533,8 @@ class FBO_TenantScheduleProvider extends ChangeNotifier {
     var jsonData = json.decode(jsonBody);
     print(response.statusCode);
     TenantssData = jsonData;
-    String abc;
-    selectedTenant = abc;
+    // String abc;
+    // selectedTenant = abc;
     print(jsonData);
     notifyListeners();
   }

@@ -5,11 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_forget_pass_recover_with_verify/Models/profile/ServiceModel.dart';
 import 'package:flutter_forget_pass_recover_with_verify/Screens/FBOScreen/FBO_Tenant_Schedule_tab.dart';
-import 'package:flutter_forget_pass_recover_with_verify/Screens/TenantScreen/Tenant_Dropdown/TenantDBtn/DB_Pilot.dart';
-import 'package:flutter_forget_pass_recover_with_verify/Screens/TenantScreen/Tenant_Dropdown/TenantDBtn/DB_Tenant.dart';
-import 'package:flutter_forget_pass_recover_with_verify/Screens/TenantScreen/Tenant_Dropdown/TenantDBtn/DB_Tenant_Aircrafts.dart';
-import 'package:flutter_forget_pass_recover_with_verify/Screens/TenantScreen/Tenant_Dropdown/TenantDBtn/DB_Tenant_Building.dart';
-import 'package:flutter_forget_pass_recover_with_verify/Screens/tabbar_screen/Tenant_schedule_tab.dart';
 import 'package:flutter_forget_pass_recover_with_verify/Services/tenant_home_get.dart';
 import 'package:flutter_forget_pass_recover_with_verify/TimerField/Tenant/date_picker_widget.dart';
 import 'package:flutter_forget_pass_recover_with_verify/TimerField/Tenant/time_picker_widget.dart';
@@ -18,6 +13,10 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Widgets/Component/simpleText.dart';
+import 'DB_Tenant/FBO_DB_Pilot.dart';
+import 'DB_Tenant/FBO_DB_Tenant.dart';
+import 'DB_Tenant/FBO_DB_Tenant_Aircrafts.dart';
+import 'DB_Tenant/FBO_DB_Tenant_Building.dart';
 
 // ignore: camel_case_types
 class UpdateSchedule extends StatefulWidget {
@@ -57,7 +56,8 @@ class _UpdateScheduleState extends State<UpdateSchedule> {
 
   GetData() async {
     getSharedPref();
-    Provider.of<TenantScheduleProvider>(context, listen: false).getServices();
+    Provider.of<FBO_TenantScheduleProvider>(context, listen: false)
+        .getServices();
 
     await tenant_home_Get();
     setState(() {});
@@ -129,13 +129,13 @@ class _UpdateScheduleState extends State<UpdateSchedule> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       SimpleText("Tenant"),
-                      DB_Tenant(),
+                      FBO_DB_Tenant(),
                       SimpleText("Pilots"),
-                      DB_Tenant_Pilot(),
+                      FBO_DB_Tenant_Pilot(),
                       SimpleText("Aircrafts"),
-                      DB_Tenant_Aircrafts(),
+                      FBO_DB_Tenant_Aircrafts(),
                       SimpleText("Buildings"),
-                      DB_Tenant_Building(),
+                      FBO_DB_Tenant_Building(),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [

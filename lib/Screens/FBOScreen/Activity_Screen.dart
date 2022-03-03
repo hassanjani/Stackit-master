@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_forget_pass_recover_with_verify/Models/profile/Add_TextField.dart';
-import 'package:flutter_forget_pass_recover_with_verify/Screens/FBOScreen/UpdateSchedule.dart';
 import 'package:flutter_forget_pass_recover_with_verify/Screens/Pilot_And_Transient_Screen/component/component.dart';
 import 'package:flutter_forget_pass_recover_with_verify/Widgets/Component/simpleText.dart';
 import 'package:http/http.dart' as http;
@@ -11,6 +10,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'FBO_Tenant_Schedule_tab.dart';
+import 'UpdateSchedule.dart';
 
 class Activity_Screen extends StatefulWidget {
   @override
@@ -377,54 +377,23 @@ class _Activity_ScreenState extends State<Activity_Screen> {
                                           height: 35,
                                           child: MaterialButton(
                                               onPressed: () {
-                                                Provider.of<FBO_TenantScheduleProvider>(
-                                                        context,
-                                                        listen: false)
-                                                    .changename(
-                                                  pilot.pilotName,
-                                                  pilot.aircraft,
-                                                  pilot.buildingName,
-                                                  pilot.iata,
-                                                  pilot.status,
-                                                );
-                                                Provider.of<FBO_TenantScheduleProvider>(
-                                                        context,
-                                                        listen: false)
-                                                    .onchange(
-                                                        "Pid",
-                                                        editReservation.pilotId
-                                                            .toString());
-                                                Provider.of<FBO_TenantScheduleProvider>(
-                                                        context,
-                                                        listen: false)
-                                                    .onchange(
-                                                        "Tid",
-                                                        editReservation.tenantId
-                                                            .toString());
-                                                Provider.of<FBO_TenantScheduleProvider>(
-                                                        context,
-                                                        listen: false)
-                                                    .onchange(
-                                                        "Aid",
-                                                        editReservation
-                                                            .aircraftId
-                                                            .toString());
-                                                Provider.of<FBO_TenantScheduleProvider>(
-                                                        context,
-                                                        listen: false)
-                                                    .onchange(
-                                                        "Bid",
-                                                        editReservation
-                                                            .buildingId
-                                                            .toString());
+                                                // Navigator.push(
+                                                //     context,
+                                                //     MaterialPageRoute(
+                                                //         builder: (context) =>
+                                                //             FBO_Tenant_Schedule_Tab()));
 
-                                                Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            UpdateSchedule(
-                                                                editReservation
-                                                                    .id)));
+                                                Future.delayed(
+                                                    const Duration(seconds: 1),
+                                                    () {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              UpdateSchedule(
+                                                                  editReservation
+                                                                      .id)));
+                                                });
                                               },
                                               child: Text("Schedule",
                                                   style: TextStyle(
@@ -481,7 +450,7 @@ class _Activity_ScreenState extends State<Activity_Screen> {
     Map<String, dynamic> data = jsonDecode(response.body);
 
     editReservation = EditReservation.fromMap(json.decode(response.body));
-
+    setProviderData();
     // if (success == "1") {
     //   print(response.statusCode);
     //   print('done');
@@ -501,6 +470,32 @@ class _Activity_ScreenState extends State<Activity_Screen> {
     //       width: MediaQuery.of(context).size.width * 0.90,
     //       content: Text(data["message"])));
     //}
+  }
+
+  void setProviderData() {
+    Provider.of<FBO_TenantScheduleProvider>(context, listen: false).getTenant();
+
+    Provider.of<FBO_TenantScheduleProvider>(context, listen: false)
+        .onchange("Pid", editReservation.pilotId.toString());
+    Provider.of<FBO_TenantScheduleProvider>(context, listen: false)
+        .onchange("Tid", editReservation.tenantId.toString());
+    Provider.of<FBO_TenantScheduleProvider>(context, listen: false)
+        .onchange("Aid", editReservation.aircraftId.toString());
+    Provider.of<FBO_TenantScheduleProvider>(context, listen: false)
+        .onchange("Bid", editReservation.buildingId.toString());
+
+    Provider.of<FBO_TenantScheduleProvider>(context, listen: false)
+        .onchange("Adate", editReservation.arrivalDate);
+    Provider.of<FBO_TenantScheduleProvider>(context, listen: false)
+        .onchange("Atime", editReservation.arrivalTime);
+
+    Provider.of<FBO_TenantScheduleProvider>(context, listen: false).changename(
+      pilot.pilotName.toString(),
+      pilot.aircraft,
+      pilot.buildingName,
+      pilot.iata,
+      pilot.status,
+    );
   }
 }
 
