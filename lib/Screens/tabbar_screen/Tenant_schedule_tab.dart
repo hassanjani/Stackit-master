@@ -511,8 +511,13 @@ class TenantScheduleProvider extends ChangeNotifier {
   Future<List<ServicesModel>> getServices() async {
     final prefs = await SharedPreferences.getInstance();
     String id = await prefs.getString('userid');
+    int userTypeid = await prefs.getInt('usertype');
 
-    var map = {"user_id": "$id", "user_type_id": "3", "schedule_type": "1"};
+    var map = {
+      "user_id": "$id",
+      "user_type_id": "$userTypeid",
+      "schedule_type": "1"
+    };
 
     String url =
         'http://wordpresswebsiteprogrammer.com/stackit/public/api/get-services';

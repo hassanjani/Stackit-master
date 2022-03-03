@@ -474,11 +474,10 @@ class _Activity_ScreenState extends State<Activity_Screen> {
 
   void setProviderData() {
     Provider.of<FBO_TenantScheduleProvider>(context, listen: false).getTenant();
-
-    Provider.of<FBO_TenantScheduleProvider>(context, listen: false)
-        .onchange("Pid", editReservation.pilotId.toString());
     Provider.of<FBO_TenantScheduleProvider>(context, listen: false)
         .onchange("Tid", editReservation.tenantId.toString());
+    Provider.of<FBO_TenantScheduleProvider>(context, listen: false)
+        .onchange("Pid", editReservation.pilotId.toString());
     Provider.of<FBO_TenantScheduleProvider>(context, listen: false)
         .onchange("Aid", editReservation.aircraftId.toString());
     Provider.of<FBO_TenantScheduleProvider>(context, listen: false)

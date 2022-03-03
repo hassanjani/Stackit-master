@@ -48,11 +48,13 @@ class _FBO_Tenant_Schedule_TabState extends State<FBO_Tenant_Schedule_Tab> {
   @override
   void initState() {
     super.initState();
+
     GetData();
   }
 
   GetData() async {
     getSharedPref();
+    Provider.of<FBO_TenantScheduleProvider>(context, listen: false).Clearall();
     Provider.of<FBO_TenantScheduleProvider>(context, listen: false)
         .getServices();
 
@@ -453,6 +455,7 @@ class FBO_TenantScheduleProvider extends ChangeNotifier {
   }
 
   getPilots() async {
+    print("pilot: $Tid");
     var response = await http.get(
         "http://wordpresswebsiteprogrammer.com/stackit/public/api/get-pilots-list?tenant_id=$Tid",
         headers: {"Accept": "application/json"});
@@ -467,7 +470,20 @@ class FBO_TenantScheduleProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  Clearall() {
+    String abc;
+    Tid = abc;
+    Pid = abc;
+    Aid = abc;
+    Bid = abc;
+    Adate = "";
+    Atime = "";
+    notifyListeners();
+  }
+
   getAircrafts() async {
+    print("aircraft: $Pid");
+
     var response = await http.get(
         "http://wordpresswebsiteprogrammer.com/stackit/public/api/get-aircrafts-list?pilot_id=$Pid",
         headers: {"Accept": "application/json"});
@@ -477,13 +493,15 @@ class FBO_TenantScheduleProvider extends ChangeNotifier {
     print("Aircraft");
     print(response.body.toString());
     AircraftData = jsonData;
-    // String abc;
-    // selectedAircraft = abc;
+    String abc;
+    selectedAircraft = abc;
     print(jsonData);
     notifyListeners();
   }
 
   Future getAllBuildings() async {
+    print("building: $Aid");
+
     var response = await http.get(
         "http://wordpresswebsiteprogrammer.com/stackit/public/api/get-buildings-list?aircraft_id=$Aid",
         headers: {"Accept": "application/json"});

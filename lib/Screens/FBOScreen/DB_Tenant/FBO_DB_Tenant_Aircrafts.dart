@@ -57,7 +57,7 @@ class _FBO_DB_Tenant_AircraftsState extends State<FBO_DB_Tenant_Aircrafts> {
                         ),
                       ),
                       hint: Text('Choose Option'), // Not necessary for Option 1
-                      value: pdata.Aid,
+                      value: getvalue(pdata.Aid, pdata.AircraftData),
                       onChanged: (newValue) {
                         Provider.of<FBO_TenantScheduleProvider>(context,
                                 listen: false)
@@ -89,5 +89,29 @@ class _FBO_DB_Tenant_AircraftsState extends State<FBO_DB_Tenant_Aircrafts> {
         ],
       ),
     );
+  }
+
+  String getvalue(String v, List<dynamic> list) {
+    // dynamic value =
+    //     list.singleWhere((item) => item["id"] == v, orElse: () => null);
+    int a = 0;
+    list.forEach((element) {
+      print(v);
+      print(element["id"]);
+      if (element["id"].toString() == v) {
+        print("true");
+        a = 1;
+      }
+    });
+
+    if (a == 1) {
+      print("notnull");
+      return v;
+    } else {
+      print("null");
+
+      String abc;
+      return abc;
+    }
   }
 }

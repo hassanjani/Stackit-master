@@ -284,5 +284,6 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
   Saveuserid(String id) async {
     final prefs = await SharedPreferences.getInstance();
     prefs.setString('userid', id);
+    prefs.setInt('usertype', selectedindex);
   }
 }
